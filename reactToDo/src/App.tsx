@@ -38,11 +38,28 @@ function App() {
         handleSubmit={handleSubmit}
       />
       <h3>Displaying ToDo:</h3>
-      <ul>
-        {toDoList.map((toDo)=>{
-          return <li>Task: {toDo.task}, dueDate: {toDo.dueDate}, priority: {toDo.priority}</li>
-        })}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Due date</th>
+            <th>priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          {toDoList.map((toDo)=>{
+            return (
+              <tr>
+                <td>{toDo.task}</td>
+                <td>{toDo.dueDate}</td>
+                <td>{toDo.priority}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+      
+      
     </div>
   )
 }
