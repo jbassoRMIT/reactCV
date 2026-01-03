@@ -13,6 +13,29 @@ function App() {
     priority:""
   })
 
+  //Write  a function that takes date separate by - and reformats to /
+  const dateFormatter=function(inputDate){
+    const dateArray=inputDate.split("-");
+    let day=dateArray[2];
+    //Check if single of double digits and slice if necessary
+    if(Number(day)<10){
+      day=dateArray[2][1];
+    }
+
+    let month=dateArray[1];
+    if(Number(month)<10){
+      month=dateArray[1][1];
+    }
+    const year=dateArray[0].slice(2,4);
+
+    const outputDate=`${day}/${month}/${year}`;
+    return outputDate;
+  }
+
+
+  //need to use state to update toDoList whenever the form is sibmitted and a new todo is added
+  const [toDos,setToDos]=useState(toDoList);
+
   const handleChange=function(e){
     const name=e.target.name;
     const value=e.target.value;
@@ -22,10 +45,16 @@ function App() {
   //Create instance of ToDo to test import
   const firstTodo=new ToDo("Mow lawn","23/08/26","high");
 
+
+  //On submit the form should create a new isntance of toDo and add it to toDoList
   const handleSubmit=function(e){
     e.preventDefault();
     console.log("form submitted");
     console.log(inputs);
+
+    const newToDo=new ToDo(inputs.task,dateFormatter(inputs.dueDate),inputs.priority);
+    setToDos([...toDos,newToDo])
+    console.log(toDos);
   }
 
   return (
@@ -47,7 +76,7 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {toDoList.map((toDo)=>{
+          {toDos.map((toDo)=>{
             return (
               <tr>
                 <td>{toDo.task}</td>
