@@ -5,6 +5,7 @@ import { ToDo} from './ToDo'
 import { toDoList } from './ToDoList'
 import AddToDo from './AddToDo'
 import './App.css'
+import { v4 as uuid } from "uuid";
 
 function App() {
   const [inputs,setInputs]=useState({
@@ -43,7 +44,7 @@ function App() {
   }
 
   //Create instance of ToDo to test import
-  const firstTodo=new ToDo("Mow lawn","23/08/26","high");
+  // const firstTodo=new ToDo("Mow lawn","23/08/26","high");
 
 
   //On submit the form should create a new isntance of toDo and add it to toDoList
@@ -52,7 +53,7 @@ function App() {
     console.log("form submitted");
     console.log(inputs);
 
-    const newToDo=new ToDo(inputs.task,dateFormatter(inputs.dueDate),inputs.priority);
+    const newToDo=new ToDo(uuid(),inputs.task,dateFormatter(inputs.dueDate),inputs.priority);
     setToDos([...toDos,newToDo])
     console.log(toDos);
   }
@@ -79,6 +80,7 @@ function App() {
           {toDos.map((toDo)=>{
             return (
               <tr>
+                <td>{toDo.id}</td>
                 <td>{toDo.task}</td>
                 <td>{toDo.dueDate}</td>
                 <td>{toDo.priority}</td>

@@ -1,6 +1,7 @@
-//Writing a component that represents a single todo as a class
+//Writing a component that represents a single todo as a class,give each a unique id 
 class ToDo{
-    constructor(task,dueDate,priority){
+    constructor(id,task,dueDate,priority){
+        this.id=id,
         this.task=task,
         this.dueDate=dueDate,
         this.priority=priority
