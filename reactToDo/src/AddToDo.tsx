@@ -10,7 +10,7 @@ export default function AddToDo({task,dueDate,priority,handleChange,handleSubmit
                 <input id="dueDate" type="date" value={dueDate} name="dueDate" onChange={handleChange}/><br />
                 <label htmlFor="priority">Priority:</label>
                 <input id="priority" type="text" value={priority} name="priority" onChange={handleChange} /><br />
-                <button type="submit">Add Todo</button>
+                <button className="addButton" type="submit">Add Todo</button>
             </form>
         </div>
     )

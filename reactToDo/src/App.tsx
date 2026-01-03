@@ -6,6 +6,7 @@ import { toDoList } from './ToDoList'
 import AddToDo from './AddToDo'
 import './App.css'
 import { v4 as uuid } from "uuid";
+import DeleteToDo from './DeleteToDo'
 
 function App() {
   const [inputs,setInputs]=useState({
@@ -58,6 +59,13 @@ function App() {
     console.log(toDos);
   }
 
+  const DeleteToDo=function(id){
+    setToDos(
+      toDos.filter((t)=> t.id!==id)
+    )
+    console.log(toDos);
+  }
+
   return (
     <div>
       <AddToDo 
@@ -74,16 +82,20 @@ function App() {
             <th>Task</th>
             <th>Due date</th>
             <th>priority</th>
+            <th>remove</th>
           </tr>
         </thead>
         <tbody>
           {toDos.map((toDo)=>{
             return (
               <tr>
-                <td>{toDo.id}</td>
                 <td>{toDo.task}</td>
                 <td>{toDo.dueDate}</td>
                 <td>{toDo.priority}</td>
+                <td>
+                  <button className='deleteButton' onClick={()=>{DeleteToDo(toDo.id)}}>Delete
+                  </button>
+                </td>
               </tr>
             )
           })}

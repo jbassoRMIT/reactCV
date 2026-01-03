@@ -5,3 +5,11 @@ h3{
 th,td{
   border: 1px solid black;
 }
+
+.addButton{
+  background-color: rgb(68, 179, 253);
+}
+
+.deleteButton{
+  background-color: rgb(255, 65, 65);
+}
