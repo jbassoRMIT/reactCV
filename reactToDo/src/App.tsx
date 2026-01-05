@@ -38,6 +38,10 @@ function App() {
   //need to use state to update toDoList whenever the form is sibmitted and a new todo is added
   const [toDos,setToDos]=useState(toDoList);
 
+  //Use state to track whether an item is being edited, so we decide whether or not to display the edit form
+  const [edit,setEdit]=useState(false);
+  const [editingId,setEditingId]=useState(0);
+
   const handleChange=function(e){
     const name=e.target.name;
     const value=e.target.value;
@@ -64,6 +68,34 @@ function App() {
       toDos.filter((t)=> t.id!==id)
     )
     console.log(toDos);
+  }
+
+  const EditToDo=function(id){
+    setEdit(true);
+    setEditingId(id);
+    console.log(editingId)
+    console.log(toDos);
+  }
+
+  const editForm=function(id){
+    let indexEdit=0;
+    for (let i=0;i<toDos.length;i++){
+      if(toDos[i].id==id){
+        indexEdit=i;
+      }
+    }
+    
+    return(
+      <form action="">
+        <label htmlFor="task">Updated task: </label>
+        <input type="text" name='task' value={toDos[indexEdit].task} /><br />
+        <label htmlFor="dueDate">Updated due date: </label>
+        <input type="date" name='dueDate' value={toDos[indexEdit].dueDate} /><br />
+        <label htmlFor="priority">Updated task: </label>
+        <input type="text" name='priority' value={toDos[indexEdit].priority} /><br />
+        <button type='submit'>Edit</button>
+      </form>
+    )
   }
 
   return (
@@ -93,16 +125,17 @@ function App() {
                 <td>{toDo.dueDate}</td>
                 <td>{toDo.priority}</td>
                 <td>
-                  <button className='deleteButton' onClick={()=>{DeleteToDo(toDo.id)}}>Delete
-                  </button>
+                  <button className='deleteButton' onClick={()=>{DeleteToDo(toDo.id)}}>Delete</button>
+                </td>
+                <td>
+                  <button className='editButton' onClick={()=>{EditToDo(toDo.id)}}>Edit</button>
                 </td>
               </tr>
             )
           })}
         </tbody>
       </table>
-      
-      
+      {edit? editForm(editingId):null}
     </div>
   )
 }
